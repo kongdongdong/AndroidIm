@@ -3,3 +3,6 @@
 .idea
 .DS_Store
 ._.DS_Store
+AndroidIm-web/target/
+AndroidIm-dao/target/
+AndroidIm-service/target/

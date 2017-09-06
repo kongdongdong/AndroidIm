@@ -9,7 +9,6 @@
             <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
             <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
                 <ul class="cl">
-                    <li>超级管理员</li>
                     <li class="dropDown dropDown_hover"> <a href="#" class="dropDown_A"><c:if test="${userInfo.nickname == null }">${userInfo.username}</c:if><c:if test="${userInfo.nickname != null }">${userInfo.nickname}</c:if><i class="Hui-iconfont">&#xe6d5;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
                             <li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>

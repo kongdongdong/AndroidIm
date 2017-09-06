@@ -22,22 +22,20 @@
         <article class="cl pd-20">
             <table class="table table-bordered table-border table-bordered table-bg mt-20">
                 <thead>
-                <tr>
-                    <th colspan="7" scope="col" class="th_head">用户列表</th>
-                </tr>
+                    <tr>
+                        <th colspan="7" scope="col" class="th_head">用户列表</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td >用户名</td>
-                    <td >昵称</td>
-                    <td >性别</td>
-                    <td >邮箱</td>
-                    <td >电话</td>
-                    <td >生日</td>
-                    <td >操作</td>
-
-                </tr>
-
+                    <tr>
+                        <td >用户名</td>
+                        <td >昵称</td>
+                        <td >性别</td>
+                        <td >邮箱</td>
+                        <td >电话</td>
+                        <td >生日</td>
+                        <td >操作</td>
+                    </tr>
                 <c:forEach var="user" items="${userList}">
                     <tr>
                         <td>${user.username}</td>
@@ -56,7 +54,10 @@
                         <td>${user.email}</td>
                         <td>${user.phone}</td>
                         <td>${user.birthday}</td>
-                        <td>删除</td>
+                        <td >
+                            <input id="update" class="btn btn-primary radius size-S" type="button" value="修改">
+                            <input id="delete" class="btn radius btn-danger size-S" type="button" value="删除">
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -73,7 +74,7 @@
 <script type="text/javascript" src="<%=basePath%>static/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="<%=basePath%>static/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="<%=basePath%>static/h-ui.admin/js/H-ui.admin.page.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/home.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/user/userlist.js"></script>
 
 <!--/_footer /作为公共模版分离出去-->
 

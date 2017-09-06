@@ -3,6 +3,7 @@ package com.kdd.androidim.web.common.inteceptor;
 import com.kdd.androidim.web.common.UserInfoSession;
 import com.kdd.androidim.web.common.domain.BaseResponse;
 import com.kdd.androidim.web.common.domain.UserInfo;
+import com.kdd.androidim.web.common.domain.WebGlobalVo;
 import com.kdd.androidim.web.common.enums.ResultCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,6 +56,20 @@ public class LoginInteceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        if(modelAndView!=null){
+            String uri = request.getRequestURI();
+            if(uri.startsWith("/")){
+                uri = uri.substring(1,uri.length());
+            }
+            WebGlobalVo webGlobalVo = new WebGlobalVo();
+            webGlobalVo.setCurrentUrl(uri);
 
+            int end = uri.lastIndexOf("/");
+            if(end!=-1 && end<=uri.length()){
+                String parentCurrentUrl = uri.substring(0,end);
+                webGlobalVo.setParentCurrentUrl(parentCurrentUrl);
+            }
+            modelAndView.addObject("webGlobalVo",webGlobalVo);
+        }
     }
 }

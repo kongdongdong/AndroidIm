@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!--_menu 作为公共模版分离出去-->
@@ -79,13 +80,36 @@
 
         <c:forEach var="parent" items="${menuList}">
             <dl>
-                <dt><i class="Hui-iconfont">${parent.menuIcon}</i> ${parent.menuName} <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-                <dd>
+                <c:choose>
+                    <c:when test="${webGlobalVo.parentCurrentUrl == parent.menuUrl }">
+                        <dt  class="selected">
+                            <i class="Hui-iconfont">${parent.menuIcon}</i> ${parent.menuName}
+                            <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                        </dt>
+                        <dd style="display:block;">
+                    </c:when>
+                    <c:otherwise>
+                        <dt>
+                            <i class="Hui-iconfont">${parent.menuIcon}</i> ${parent.menuName}
+                            <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                        </dt>
+                        <dd>
+                    </c:otherwise>
+                </c:choose>
+
                     <c:choose>
                         <c:when test="${parent.children !=null }">
                             <ul>
                                 <c:forEach var="child" items="${parent.children}">
-                                    <li id="aa"><a  href="${child.menuUrl}" title="${child.menuName}">${child.menuName}</a></li>
+                                    <c:choose>
+                                        <c:when test="${webGlobalVo.currentUrl == child.menuUrl }">
+                                            <li class="current"><a  href="<%=basePath%>${child.menuUrl}" title="${child.menuName}">${child.menuName}</a></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li><a  href="<%=basePath%>${child.menuUrl}" title="${child.menuName}">${child.menuName}</a></li>
+                                        </c:otherwise>
+                                    </c:choose>
+
                                 </c:forEach>
                             </ul>
                         </c:when>
