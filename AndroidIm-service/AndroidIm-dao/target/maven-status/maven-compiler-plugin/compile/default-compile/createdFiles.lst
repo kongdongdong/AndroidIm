@@ -1,0 +1,7 @@
+com\kdd\androidim\dao\mapping\ImMenuMapper.class
+com\kdd\androidim\dao\entity\BaseEntity.class
+com\kdd\androidim\dao\entity\MenuChild.class
+com\kdd\androidim\dao\entity\ImUser.class
+com\kdd\androidim\dao\demo.class
+com\kdd\androidim\dao\mapping\ImUserMapper.class
+com\kdd\androidim\dao\entity\ImMeun.class

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kdd.androidim.dao.mapping.ImMenuMapper">
+
+    <!--查出父菜单-->
+    <select id="findMenuByUsername" parameterType="String" resultMap="MenuResultMap">
+        SELECT
+        b.id,
+        b.menu_no,
+        b.menu_order,
+        b.menu_name,
+        b.menu_url,
+        b.menu_icon,
+        b.menu_type,
+        b.is_visible,
+        b.is_leaf
+        FROM im_privilege a
+        left join im_menu b
+        on a.menu_id = b.menu_no
+        where user_id=#{username} and b.is_leaf=0 and b.is_visible=1 ORDER BY b.menu_order ASC ;
+    </select>
+
+    <resultMap type="com.kdd.androidim.dao.entity.ImMeun" id="MenuResultMap">
+        <!-- 用id属性来映射主键字段 -->
+        <id property="id" column="id"/>
+
+        <result property="menuParentNo" column="menu_parent_no"/>
+        <result property="menuNo" column="menu_no"/>
+        <result property="menuOrder" column="menu_order"/>
+        <result property="menuName" column="menu_name"/>
+        <result property="menuUrl" column="menu_url"/>
+        <result property="menuIcon" column="menu_icon"/>
+        <result property="menuType" column="menu_type"/>
+        <result property="isVisible" column="is_visible"/>
+        <result property="isLeaf" column="is_leaf"/>
+
+        <collection property="children" ofType="com.kdd.androidim.dao.entity.MenuChild" column="menu_no" select="getChildMenu"></collection>
+
+    </resultMap>
+
+    <!--根据父菜单查出子菜单-->
+    <select id="getChildMenu" parameterType="Integer" resultMap="MenuResultMap">
+        SELECT * FROM im_menu WHERE menu_parent_no=#{menu_no} and is_visible=1 ORDER BY menu_order ASC ;
+    </select>
+
+</mapper>
