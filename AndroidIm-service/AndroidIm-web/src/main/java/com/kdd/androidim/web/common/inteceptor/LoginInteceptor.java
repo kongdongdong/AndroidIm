@@ -15,6 +15,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
+import java.util.Map;
 
 /**
  * Created by kdd on 17/8/31.
@@ -69,7 +70,9 @@ public class LoginInteceptor extends HandlerInterceptorAdapter {
                 String parentCurrentUrl = uri.substring(0,end);
                 webGlobalVo.setParentCurrentUrl(parentCurrentUrl);
             }
+            UserInfo userInfo=UserInfoSession.getCurrentUser();
             modelAndView.addObject("webGlobalVo",webGlobalVo);
+            modelAndView.addObject("userInfo",userInfo);
         }
     }
 }

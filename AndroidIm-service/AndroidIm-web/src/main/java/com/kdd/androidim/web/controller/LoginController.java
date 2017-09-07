@@ -113,9 +113,9 @@ public class LoginController {
     @RequestMapping(value = "/home")
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView();
-        UserInfo userInfo=UserInfoSession.getCurrentUser();
+
         List<ImMeun> menuList = UserInfoSession.getFromSession(UserInfoSession.MENU_LIST);
-        modelAndView.addObject("userInfo",userInfo);
+
         modelAndView.addObject("menuList",menuList);
         modelAndView.setViewName("home.jsp");
         return modelAndView;

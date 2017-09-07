@@ -1,0 +1,12 @@
+table {
+    border: 1px red;
+    margin-left: 20px;
+    width: 20%;
+    align-content: center;
+}
+tr{
+    height: 50px;
+}
+label{
+    text-align: right;
+}
