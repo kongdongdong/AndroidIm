@@ -7,6 +7,12 @@
     android:orientation="vertical"
     tools:context="com.androidim.client.MainActivity">
 
+    <Button
+        android:id="@+id/bt_conn"
+        android:text="连接"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_height="wrap_content"
