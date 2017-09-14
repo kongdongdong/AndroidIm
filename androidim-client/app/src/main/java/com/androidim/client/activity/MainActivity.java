@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.androidim.client.R;
 import com.androidim.lib.Config;
+import com.androidim.lib.XmppManager;
 import com.androidim.lib.factory.KeepAliveMessageFactoryImpl;
 import com.androidim.lib.handler.MinaClientHandler;
 
@@ -56,7 +57,8 @@ public class MainActivity extends Activity {
         btConn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startConnection();
+                XmppManager.getXmppManager().startConnection();
+                //startConnection();
                 //startSocketConnection();
             }
         });
@@ -93,8 +95,6 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
                 try {
-
-
                     sendHeartBeat();
                 } catch (Exception e) {
                     e.printStackTrace();

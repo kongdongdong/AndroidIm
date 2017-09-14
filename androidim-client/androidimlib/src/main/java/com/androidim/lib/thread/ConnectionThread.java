@@ -27,6 +27,7 @@ import java.nio.charset.Charset;
  */
 
 public class ConnectionThread extends Thread{
+    public static final String TAG = "ConnectionThread";
 
     private ConnectionListener connectionListener;
 
@@ -41,7 +42,6 @@ public class ConnectionThread extends Thread{
         this.connectionListener = connectionListener;
     }
 
-    public static final String TAG = "ConnectionThread";
     @Override
     public void run() {
         IoConnector connector = new NioSocketConnector();

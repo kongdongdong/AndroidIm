@@ -16,7 +16,7 @@ public class Config {
     //读取数据大小
     public static final int BUFFERSIZE=1024;
     //连接超时时间
-    public static final int CONNECTION_TIMEOUT=5*1000;
+    public static final int CONNECTION_TIMEOUT=3*1000;
 
 
 }

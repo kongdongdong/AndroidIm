@@ -46,6 +46,7 @@ public class MinaClientHandler extends IoHandlerAdapter {
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
         Log.i(TAG,"接收到消息=="+message.toString());
+
     }
 
     @Override

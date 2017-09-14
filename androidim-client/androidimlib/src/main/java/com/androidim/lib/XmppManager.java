@@ -1,6 +1,14 @@
 package com.androidim.lib;
 
+import android.util.Log;
+
+import com.androidim.lib.exception.ConnectionException;
+import com.androidim.lib.listener.ConnectionListener;
+import com.androidim.lib.net.Connection;
+import com.androidim.lib.thread.AuthenThread;
 import com.androidim.lib.thread.ConnectionThread;
+
+import org.apache.mina.core.session.IoSession;
 
 /**
  * Created by ddkong on 2017/9/13.
@@ -8,8 +16,9 @@ import com.androidim.lib.thread.ConnectionThread;
 
 public class XmppManager {
 
-
-    private static  XmppManager xmppManager;
+    public static final String TAG = "XmppManager";
+    private static XmppManager xmppManager;
+    private Connection connection;
 
     private XmppManager() throws Exception {
         if(xmppManager!=null){
@@ -33,10 +42,30 @@ public class XmppManager {
     }
 
 
-    public static void startConnection(){
+    public void startConnection(){
+        new ConnectionThread(new ConnectionListener() {
+            @Override
+            public void ConnectSuccess(IoSession session) {
+                Log.i(TAG,"客户端连接成功...");
+                getConnection().setSession(session);
+                startAuthenThread();
+            }
+            @Override
+            public void ConnectFail(ConnectionException e) {
+                Log.i(TAG,"客户端连接失败..."+e.getMessage());
+            }
+        }).start();
+    }
 
-        new ConnectionThread().start();
+    public void startAuthenThread(){
+        new AuthenThread().start();
+    }
 
+    public Connection getConnection() {
+        if(connection==null){
+            connection = Connection.getConnection();
+        }
+        return connection;
     }
 
 }
