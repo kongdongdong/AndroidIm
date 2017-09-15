@@ -1,5 +1,7 @@
 package com.androidim.lib.net;
 
+import com.androidim.lib.enums.ConnStatus;
+
 import org.apache.mina.core.session.IoSession;
 
 /**
@@ -9,6 +11,7 @@ import org.apache.mina.core.session.IoSession;
 public class Connection {
 
     private IoSession session;
+    private ConnStatus connStatus;
     private static Connection connection=null;
 
     private Connection() throws Exception {
@@ -38,6 +41,14 @@ public class Connection {
 
     public void setSession(IoSession session) {
         this.session = session;
+    }
+
+    public ConnStatus getConnStatus() {
+        return connStatus;
+    }
+
+    public void setConnStatus(ConnStatus connStatus) {
+        this.connStatus = connStatus;
     }
 
     public boolean isConnection(){

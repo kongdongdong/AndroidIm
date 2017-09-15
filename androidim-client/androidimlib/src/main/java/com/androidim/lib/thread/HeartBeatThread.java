@@ -1,6 +1,7 @@
 package com.androidim.lib.thread;
 
 import com.androidim.lib.factory.KeepAliveMessageFactoryImpl;
+import com.androidim.lib.net.Connection;
 
 import org.apache.mina.core.session.IoSession;
 
@@ -12,8 +13,8 @@ public class HeartBeatThread extends Thread {
 
     private IoSession session;
 
-    public HeartBeatThread(IoSession session) {
-        this.session = session;
+    public HeartBeatThread() {
+        this.session = Connection.getConnection().getSession();
     }
 
     @Override

@@ -28,19 +28,25 @@ public class KeepAliveMessageFactoryImpl implements KeepAliveMessageFactory {
     }
     @Override
     public boolean isRequest(IoSession session, Object message) {
-        Log.i(TAG,"请求心跳包=="+message.toString());
 
-        if (message.equals(HEARTBEATREQUEST))
+
+        if (message.equals(HEARTBEATREQUEST)){
+            Log.i(TAG,"请求心跳包=="+message.toString());
             return true;
+        }
+
         return false;
     }
 
     @Override
     public boolean isResponse(IoSession session, Object message) {
-        Log.i(TAG,"回复心跳包=="+message.toString());
 
-        if(message.equals(HEARTBEATRESPONSE))
+
+        if(message.equals(HEARTBEATRESPONSE)){
+            Log.i(TAG,"回复心跳包=="+message.toString());
             return true;
+        }
+
         return false;
     }
 

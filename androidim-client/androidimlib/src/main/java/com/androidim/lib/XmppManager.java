@@ -7,6 +7,7 @@ import com.androidim.lib.listener.ConnectionListener;
 import com.androidim.lib.net.Connection;
 import com.androidim.lib.thread.AuthenThread;
 import com.androidim.lib.thread.ConnectionThread;
+import com.androidim.lib.thread.HeartBeatThread;
 
 import org.apache.mina.core.session.IoSession;
 
@@ -19,6 +20,7 @@ public class XmppManager {
     public static final String TAG = "XmppManager";
     private static XmppManager xmppManager;
     private Connection connection;
+    private ConnectionThread connectionThread;
 
     private XmppManager() throws Exception {
         if(xmppManager!=null){
@@ -43,18 +45,23 @@ public class XmppManager {
 
 
     public void startConnection(){
-        new ConnectionThread(new ConnectionListener() {
+        if(connectionThread==null){
+            connectionThread = new ConnectionThread();
+        }
+        connectionThread.addConnectionListener(new ConnectionListener() {
             @Override
             public void ConnectSuccess(IoSession session) {
                 Log.i(TAG,"客户端连接成功...");
                 getConnection().setSession(session);
                 startAuthenThread();
+                new HeartBeatThread().start();
             }
             @Override
             public void ConnectFail(ConnectionException e) {
                 Log.i(TAG,"客户端连接失败..."+e.getMessage());
             }
-        }).start();
+        });
+        connectionThread.start();
     }
 
     public void startAuthenThread(){

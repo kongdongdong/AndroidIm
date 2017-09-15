@@ -2,28 +2,14 @@ package com.androidim.client.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.androidim.client.R;
-import com.androidim.lib.Config;
+import com.androidim.lib.common.Content;
 import com.androidim.lib.XmppManager;
-import com.androidim.lib.factory.KeepAliveMessageFactoryImpl;
-import com.androidim.lib.handler.MinaClientHandler;
 
-
-import org.apache.mina.core.future.ConnectFuture;
-import org.apache.mina.core.service.IoConnector;
-import org.apache.mina.core.session.IdleStatus;
-import org.apache.mina.core.session.IoSession;
-import org.apache.mina.filter.codec.ProtocolCodecFilter;
-import org.apache.mina.filter.codec.textline.LineDelimiter;
-import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
-import org.apache.mina.filter.keepalive.KeepAliveFilter;
-import org.apache.mina.filter.keepalive.KeepAliveMessageFactory;
-import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -31,9 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.nio.charset.Charset;
 
 public class MainActivity extends Activity {
 
@@ -77,7 +61,7 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
                 try {
-                    socket = new Socket(Config.IP_HOST, Config.IP_PORT);
+                    socket = new Socket(Content.IP_HOST, Content.IP_PORT);
                     in = new BufferedReader(new InputStreamReader(socket
                             .getInputStream()));
                     out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
